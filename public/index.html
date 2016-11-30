@@ -3,8 +3,38 @@
 <head>
     <meta charset="UTF-8">
     <title>WELCOME</title>
+    <script src="./vendor/chart.min.js" charset="utf-8"></script>
+    <script src="./vendor/jquery-3.1.1.min.js" charset="utf-8"></script>
 </head>
 <body>
     <h1>Welcome</h1>
+    <canvas id = "canvas"></canvas>
 </body>
+<script type="text/javascript">
+    $.ajax({
+        url: "/api/tpi",
+        data: {
+            from: new Date("2016-11-30 00:00").getTime(),
+            to: new Date().getTime()
+        }
+    }).then(results => {
+        var scatterChart = new Chart(document.getElementById("canvas"), {
+            type: 'line',
+            data: {
+                datasets: [{
+                    label: 'tpi',
+                    data: results.map((result,i) => ({ x:i, y:result }))
+                }]
+            },
+            options: {
+                scales: {
+                    xAxes: [{
+                        type: 'linear',
+                        position: 'bottom'
+                    }]
+                }
+            }
+        });
+    });
+</script>
 </html>
