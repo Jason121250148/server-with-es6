@@ -1,0 +1,9 @@
+{
+    project: {
+        id: "server-with-es6",
+        name: "Server with es6"
+    },
+    http: {
+        
+    }
+}
