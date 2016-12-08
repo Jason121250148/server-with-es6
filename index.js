@@ -30,6 +30,7 @@ function checkEnvironment()
 
 function startHttpServer()
 {
+    // const port = parseInt(config.get("http.port")) + parseInt(process.env.NODE_APP_INSTANCE);
     const port = parseInt(config.get("http.port"));
     if (isNaN(port))
     {
