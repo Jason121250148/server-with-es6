@@ -3,10 +3,13 @@ import config from "config";//不能加./，不然就是找config下的index
 import app from "./lib/app";
 import httpServer from "./lib/http/server";
 
+import socketServer from "./lib/ws";
+
 
 (function main()
 {
     checkEnvironment();
+    startSocketServer();
     startHttpServer();
 })();
 
@@ -40,4 +43,9 @@ function startHttpServer()
     httpServer.listen(port, () => {
         console.log(`The server is now listening at port ${port}...`);
     });
+}
+
+function startSocketServer()
+{
+    socketServer.attach(httpServer);
 }

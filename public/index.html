@@ -5,21 +5,26 @@
     <title>WELCOME</title>
     <script src="./vendor/chart.min.js" charset="utf-8"></script>
     <script src="./vendor/jquery-3.1.1.min.js" charset="utf-8"></script>
+    <script src="./vendor/socket.io.js" charset="utf-8"></script>
 </head>
 <body>
     <h1>Welcome</h1>
     <canvas id = "canvas"></canvas>
 </body>
 <script type="text/javascript">
-    $.ajax({
-        headers: {
-            "Accept": "text/csv; charset=utf-8",
-            "Content-Type": "text/plain; charset=utf-8"
-        },
-        url: "/api/blo/bus-line/00010-1",
-    }).then(result => {
+    var socket = io.connect("/tpi/rs");
+    socket.on("update", () => {
+        $.ajax({
+            headers: {
+                "Accept": "text/csv; charset=utf-8",
+                "Content-Type": "text/plain; charset=utf-8"
+            },
+            // url: "/api/blo/bus-line/00010-1",
+            url: "/api/tpi/indexByTime"
+        }).then(result => {
             // document.body.innerHTML = "<p>" + JSON.stringify(result) + "</p>";
             document.body.innerHTML = result;
         });
+    });
 </script>
 </html>
